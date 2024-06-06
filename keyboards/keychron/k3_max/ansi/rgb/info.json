@@ -3,6 +3,9 @@
     	"pid": "0x0A30",
     	"device_version": "1.0.0"
     },
+    "dynamic_keymap":{
+        "layer_count": 6
+    },
     "features": {
         "rgb_matrix": true
     },
