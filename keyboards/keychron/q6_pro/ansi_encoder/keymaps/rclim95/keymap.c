@@ -30,7 +30,13 @@ enum custom_keycodes {
     KC_VOICE = NEW_SAFE_RANGE,
     KC_LOCK,
     KC_EMOJI,
-    KC_COPILOT
+    KC_COPILOT,
+    KC_ZOOM_IN,
+    KC_ZOOM_OUT,
+    KC_ZOOM_RESET,
+    KC_ZIN = KC_ZOOM_IN,
+    KC_ZOUT = KC_ZOOM_OUT,
+    KC_ZR = KC_ZOOM_RESET
 };
 
 typedef struct PACKED {
@@ -38,11 +44,14 @@ typedef struct PACKED {
     uint8_t keycode[3];
 } key_combination_t;
 
-key_combination_t custom_key_comb_list[4] = {
+key_combination_t custom_key_comb_list[7] = {
     { 2, { KC_LWIN, KC_H } },
     { 2, { KC_LWIN, KC_L } },
     { 2, { KC_LWIN, KC_DOT } },
-    { 3, { KC_LWIN, KC_LEFT_SHIFT, KC_F23 } }
+    { 3, { KC_LWIN, KC_LEFT_SHIFT, KC_F23 } },
+    { 2, { KC_LEFT_CTRL, KC_EQUAL }},
+    { 2, { KC_LEFT_CTRL, KC_MINUS }},
+    { 2, { KC_LEFT_CTRL, KC_0 }}
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -61,14 +70,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,              _______,            _______,  _______,  _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,    _______,  _______,  _______,  _______,            _______         ),
     [WIN_BASE] = LAYOUT_109_ansi(
-        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     KC_MUTE,    KC_PSCR,  KC_VOICE, KC_LOCK,  _______,  _______,  _______,  _______,
+        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,     KC_ZR,      KC_PSCR,  KC_VOICE, KC_LOCK,  _______,  _______,  _______,  _______,
         KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,     KC_BSPC,    KC_INS,   KC_HOME,  KC_PGUP,  KC_NUM,   KC_PSLS,  KC_PAST,  KC_PMNS,
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,    KC_BSLS,    KC_DEL,   KC_END,   KC_PGDN,  KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,                                   KC_P4,    KC_P5,    KC_P6,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,              KC_UP,              KC_P1,    KC_P2,    KC_P3,    KC_PENT,
         KC_LCTL,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  KC_RWIN,  MO(WIN_FN), KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,              KC_PDOT         ),
     [WIN_FN] = LAYOUT_109_ansi(
-        _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,    RGB_TOG,    _______,  _______,  RGB_TOG,  _______,  _______,  _______,  _______,
+        _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,    KC_MUTE,    _______,  _______,  RGB_TOG,  _______,  _______,  _______,  _______,
         _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    KC_SCRL,  _______,  _______,  _______,  _______,  _______,  _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,  _______,  _______,  _______,  _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,                                  _______,  _______,  _______,
@@ -87,8 +96,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM encoder_map[][1][2] = {
     [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [MAC_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
-    [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [WIN_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [WIN_BASE] = {ENCODER_CCW_CW(KC_ZOOM_OUT, KC_ZOOM_IN) },
+    [WIN_FN] =   {ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [MOD_1]    = {ENCODER_CCW_CW(_______, _______) }
 };
 #endif // ENCODER_MAP_ENABLE
@@ -99,6 +108,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_LOCK:
         case KC_EMOJI:
         case KC_COPILOT:
+        case KC_ZOOM_IN:
+        case KC_ZOOM_OUT:
+        case KC_ZOOM_RESET:
             if (record->event.pressed) {
                 for (uint8_t i = 0; i < custom_key_comb_list[keycode - KC_VOICE].len; i++) {
                     register_code(custom_key_comb_list[keycode - KC_VOICE].keycode[i]);
@@ -117,19 +129,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+#if RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Determine what's the active layer and set our color.
-    //
-    // Color Palette:
-    // https://www.colourpod.com/post/681707801832292352/larcenous-rainbow-submitted-by-seesawsiya
     switch (get_highest_layer(layer_state | default_layer_state)) {
         case MOD_1:
-            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, RGB_AZURE);
+            // Azure
+            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, 0x99, 0xF5, 0xFF);
             break;
         case MOD_2:
-            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, RGB_TEAL);
+            // Teal
+            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, 0x00, 0x80, 0x80);
             break;
     }
 
     return true;
 }
+#endif

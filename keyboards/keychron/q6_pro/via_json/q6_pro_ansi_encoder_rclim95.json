@@ -81,7 +81,10 @@
     {"name": "Voice Typing", "title": "Voice typing in Windows", "shortName": "Voice"},
     {"name": "Lock", "title": "Lock computer in Windows", "shortName": "Lock"},
     {"name": "Emoji", "title": "Emoji panel in Windows", "shortName": "Emoji"},
-    {"name": "Copilot", "title": "Copilot in Windows", "shortName": "Copilot"}
+    {"name": "Copilot", "title": "Copilot in Windows", "shortName": "Copilot"},
+    {"name": "Zoom In", "title": "Zoom In", "shortName": "ZoomIn"},
+    {"name": "Zoom Out", "title": "Zoom Out", "shortName": "ZoomOut"},
+    {"name": "Zoom Reset", "title": "Reset Zoom", "shortName": "ZoomRes"}
   ],
   "matrix": {"rows": 6, "cols": 21},
   "layouts": {
