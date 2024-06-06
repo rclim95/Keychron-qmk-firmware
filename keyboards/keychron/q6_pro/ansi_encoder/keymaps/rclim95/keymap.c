@@ -119,14 +119,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Determine what's the active layer and set our color.
+    //
+    // Color Palette:
+    // https://www.colourpod.com/post/681707801832292352/larcenous-rainbow-submitted-by-seesawsiya
     switch (get_highest_layer(layer_state | default_layer_state)) {
         case MOD_1:
-            // Frost
-            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, 0xFC, 0xFB, 0xFC);
+            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, RGB_AZURE);
             break;
         case MOD_2:
-            // White
-            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, 0xFF, 0xFF, 0xFF);
+            RGB_MATRIX_INDICATOR_SET_COLOR(FN_KEY_INDEX, RGB_TEAL);
             break;
     }
 
